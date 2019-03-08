@@ -2,10 +2,12 @@ function paginate (options) {
   let totalItems: number = options.totalItems
   let currentPage: number = options.currentPage || 1
   let pageSize: number = options.pageSize || 10
-  let maxPages: number = options.maxPages || 10
+  let pageLinks: number = options.pageLinks || 10
 
   // 计算总页数，比如一共300个条目，每页显示的条目 = 总条目/pageSize
   let totalPages = Math.ceil(totalItems / pageSize)
+
+  let oddPageLinks = (pageLinks % 2 !== 0) ? 0 : 1
 
   // 确保当前页不越界
   if (currentPage < 1) {
@@ -14,26 +16,27 @@ function paginate (options) {
     currentPage = totalPages
   }
   let startPage: number, endPage: number
-  // 如果总页数小于最大页数，比如总页数8也，maxPages=10,则全部全部页数 
-  if (totalPages < maxPages) {
+  // 如果总页数小于最大页数，比如总页数8也，pageLinks=10,则全部全部页数 
+  if (totalPages < pageLinks) {
     startPage = 1
     endPage = totalPages
   } else {
-    // 如果总页数大于最大页数，比如总页数20也，maxPages=10，
+    // 如果总页数大于最大页数，比如总页数20也，pageLinks=10，
     // 则需要计算起始页和末尾页，有三种情况
 
-    // 当前页之前最多能显示的页数，5
-    let maxPagesBeforeCurrentPage = Math.floor(maxPages / 2)
-    // 当前页之后最多能显示的页数，4
-    let maxPagesAfterCurrentPage = Math.floor(maxPages / 2) - 1
+    // 当前页之前最多能显示的页数
+    let maxPagesBeforeCurrentPage = Math.floor(pageLinks / 2)
+    // 当前页之后最多能显示的页数
+    let maxPagesAfterCurrentPage = Math.floor(pageLinks / 2) - oddPageLinks
     // 情况一：当前页靠近首页
     if (currentPage <= maxPagesBeforeCurrentPage) {
       startPage = 1
-      endPage = maxPages
+      endPage = pageLinks
       // (totalItems - maxPagesAfterCurrentPage) < currentPage && currentPage < totalItems
     } else if (currentPage + maxPagesAfterCurrentPage > totalPages) {
       // 情况二：当前页靠近末页
-      startPage = totalPages - maxPages + 1
+      
+      startPage = totalPages - pageLinks + 1
       endPage = totalPages
     } else {
       // 情况三：当前页位于中间
