@@ -30,7 +30,8 @@ function paginate (options) {
     if (currentPage <= maxPagesBeforeCurrentPage) {
       startPage = 1
       endPage = maxPages
-    } else if ((totalItems - maxPagesAfterCurrentPage) < currentPage && currentPage < totalItems) {
+      // (totalItems - maxPagesAfterCurrentPage) < currentPage && currentPage < totalItems
+    } else if (currentPage + maxPagesAfterCurrentPage > totalPages) {
       // 情况二：当前页靠近末页
       startPage = totalPages - maxPages + 1
       endPage = totalPages
