@@ -1,0 +1,14 @@
+{
+  "name": "jk-paginate",
+  "version": "1.0.0",
+  "description": "javascript paginate",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "tsc": "tsc"
+  },
+  "keywords": [
+    "paginate"
+  ],
+  "author": "jk",
+  "license": "MIT"
+}
