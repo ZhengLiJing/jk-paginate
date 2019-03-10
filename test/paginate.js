@@ -1,7 +1,7 @@
 const assert = require("assert");
 const Paginator = require("../lib/jk-paginate.js").Paginator;
 
-function test() {
+function testPaginator () {
   console.log("Running Paginate test");
   var item = new Paginator({
     totalItems: 100,
@@ -177,4 +177,27 @@ function test() {
   );
 }
 
-test();
+// testPaginator();
+
+function testFuncPreparePreLink () {
+  console.log("Running Function of preparePreLink test");
+  const item = new Paginator({
+    totalItems: 100,
+    currentPage: 1
+  });
+  let preLink = 'https://www.jingke.com'
+  assert.deepEqual(
+    'https://www.jingke.com?',
+    item.preparePreLink(preLink)
+  )
+
+  preLink = 'https://www.jingke.com/?page=4'
+  assert.deepEqual(
+    'https://www.jingke.com/?page=4&',
+    item.preparePreLink(preLink)
+  )
+
+  console.log(item.preparePreLink('/?'))
+}
+
+testFuncPreparePreLink()

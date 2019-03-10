@@ -1,3 +1,6 @@
+declare var require: any
+const util = require('util')
+const translator = str => str
 const Paginator = function(options) {
   let defaultOption = {
     totalItems: 100,
@@ -5,6 +8,8 @@ const Paginator = function(options) {
     pageSize: 10,
     pageLinks: 10,
     preLink: '',
+    template: "{PreviousPageLink} <strong>{CurrentPageReport}</strong>{NextPageLink}",
+    translator: translator
   };
   this.options = Object.assign({}, defaultOption, options);
 };
@@ -95,7 +100,38 @@ Paginator.prototype = {
       // 返回一个包含所有信息的对象
       return result
     }
+  },
+
+  preparePreLink: function (preLink) {
+    
+    if (preLink.indexOf('?') !== -1) {
+      if (preLink[preLink.length - 1] !== '?' && preLink[preLink.length - 1] !== '&') {
+        preLink += '&'
+      }
+    } else {
+      preLink += '?'
+    }
+
+    return preLink
+  },
+
+  render: function () {
+    throw new Error('Implement')
   }
 };
+
+const SearchPaginator = function (options) {
+  Paginator.call(this, options)
+}
+
+util.inherits(SearchPaginator, Paginator)
+
+SearchPaginator.prototype.render = function () {
+  const templte = String(this.options.template)
+  const { translator } = this.options
+  const result = this.calc()
+  const pages = []
+  let prelink = this.preparePreLink(result.preLink)
+}
 
 export { Paginator };
