@@ -10,14 +10,19 @@ function test() {
   assert.deepEqual(
     {
       totalItems: 100,
+      totalPages: 10,
       currentPage: 1,
       pageSize: 10,
-      totalPages: 10,
+      pages: [1, 2, 3, 4, 5, 6, 7, 8, 9, 10],
       startPage: 1,
       endPage: 10,
       startIndex: 0,
       endIndex: 9,
-      pages: [1, 2, 3, 4, 5, 6, 7, 8, 9, 10]
+      preLink: "",
+      previous: null,
+      next: 2,
+      first: null,
+      last: 10
     },
     item.calc()
   );
@@ -29,18 +34,23 @@ function test() {
   assert.deepEqual(
     {
       totalItems: 100,
+      totalPages: 10,
       currentPage: 8,
       pageSize: 10,
-      totalPages: 10,
+      pages: [1, 2, 3, 4, 5, 6, 7, 8, 9, 10],
       startPage: 1,
       endPage: 10,
       startIndex: 70,
       endIndex: 79,
-      pages: [1, 2, 3, 4, 5, 6, 7, 8, 9, 10]
+      preLink: "",
+      previous: 7,
+      next: 9,
+      first: 1,
+      last: 10
     },
     item.calc()
   );
-  
+
   var item = new Paginator({
     totalItems: 100,
     currentPage: 11,
@@ -49,14 +59,19 @@ function test() {
   assert.deepEqual(
     {
       totalItems: 100,
+      totalPages: 10,
       currentPage: 10,
       pageSize: 10,
-      totalPages: 10,
+      pages: [4, 5, 6, 7, 8, 9, 10],
       startPage: 4,
       endPage: 10,
       startIndex: 90,
       endIndex: 99,
-      pages: [4, 5, 6, 7, 8, 9, 10]
+      preLink: "",
+      previous: 9,
+      next: null,
+      first: 1,
+      last: 10
     },
     item.calc()
   );
@@ -69,14 +84,19 @@ function test() {
   assert.deepEqual(
     {
       totalItems: 100,
+      totalPages: 10,
       currentPage: 8,
       pageSize: 10,
-      totalPages: 10,
+      pages: [4, 5, 6, 7, 8, 9, 10],
       startPage: 4,
       endPage: 10,
       startIndex: 70,
       endIndex: 79,
-      pages: [4, 5, 6, 7, 8, 9, 10]
+      preLink: "",
+      previous: 7,
+      next: 9,
+      first: 1,
+      last: 10
     },
     item.calc()
   );
@@ -89,14 +109,19 @@ function test() {
   assert.deepEqual(
     {
       totalItems: 100,
+      totalPages: 10,
       currentPage: 5,
       pageSize: 10,
-      totalPages: 10,
+      pages: [2, 3, 4, 5, 6, 7, 8],
       startPage: 2,
       endPage: 8,
       startIndex: 40,
       endIndex: 49,
-      pages: [2, 3, 4, 5, 6, 7, 8]
+      preLink: "",
+      previous: 4,
+      next: 6,
+      first: 1,
+      last: 10
     },
     item.calc()
   );
@@ -109,14 +134,19 @@ function test() {
   assert.deepEqual(
     {
       totalItems: 100,
+      totalPages: 10,
       currentPage: 5,
       pageSize: 10,
-      totalPages: 10,
+      pages: [2, 3, 4, 5, 6, 7],
       startPage: 2,
       endPage: 7,
       startIndex: 40,
       endIndex: 49,
-      pages: [2, 3, 4, 5, 6, 7]
+      preLink: "",
+      previous: 4,
+      next: 6,
+      first: 1,
+      last: 10
     },
     item.calc()
   );
@@ -129,14 +159,19 @@ function test() {
   assert.deepEqual(
     {
       totalItems: 100,
+      totalPages: 10,
       currentPage: 5,
       pageSize: 10,
-      totalPages: 10,
+      pages: [3, 4, 5, 6],
       startPage: 3,
       endPage: 6,
       startIndex: 40,
       endIndex: 49,
-      pages: [3, 4, 5, 6]
+      preLink: "",
+      previous: 4,
+      next: 6,
+      first: 1,
+      last: 10
     },
     item.calc()
   );
